@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "QMessageBox"
 #include "folderandfileoperationscollection.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) { setupUi(); }
@@ -78,16 +79,37 @@ void MainWindow::onWriteDicom2PngSlot() {
         this, tr("Open the PNG path to be written"), "/home/jlu_wx",
         QFileDialog::ShowDirsOnly);
 
-    //    // 2.Png data preparation
-    ////    FolderAndFileOperationsCollection dicom_behind;
-    //    dicom_behind.ReadNumOfFilesNameInTheReadFolder(folder_path.toStdString(),
-    //                                                   ".png");
+    // 2.Png data preparation
+    //    FolderAndFileOperationsCollection dicom_behind;
+    dicom_behind.ReadNumOfFilesNameInTheReadFolder(folder_path.toStdString(),
+                                                   ".png");
+    /*
+    Here we need to make a judgment: is there a PNG file in the triggered
+    folder?
+    If yes, the representative wants to show the whole folder's picture (four
+    views); no, we need to do dicm2png first, and then show it.
+    */
 
-    // 3.convert and write
-    for (int i = 0; i < dicom_pre.count; i++) {
-        std::string writeCompleteFilePath = folder_path.toStdString() + "/";
-        writeCompleteFilePath += dicom_pre.SingleFileName_list[i];
-        DcmFormatConversion::ConvertDcm2Png(dicom_pre.Completefile_list[i],
-                                            writeCompleteFilePath);
+    if (dicom_behind.count == 0) {
+        // 3.convert and write
+        for (int i = 0; i < dicom_pre.count; i++) {
+            std::string writeCompleteFilePath = folder_path.toStdString() + "/";
+            // Get the first half of the string, Excluding suffixes
+            writeCompleteFilePath += [](std::string tmp) -> std::string {
+                tmp = tmp.substr(tmp.find_last_of("/") + 1,
+                                 tmp.find_last_of(".") - tmp.find_last_of("/") -
+                                     1);
+                return tmp;
+            }(dicom_pre.SingleFileName_list[i]) + ".png";
+            // deal with convertion
+            DcmFormatConversion::ConvertDcm2Png(dicom_pre.Completefile_list[i],
+                                                writeCompleteFilePath);
+        }
     }
+
+    // 4. Trigger Interface Display (Four Views)!!!
+    // The next job is only dealing with png.
+    dicom_behind.ReadNumOfFilesNameInTheReadFolder(folder_path.toStdString(),
+                                                   ".png");
+    Tips::ejectTips(std::to_string(dicom_behind.count));
 }

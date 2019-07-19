@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "QVTKWidget.h"
+//#include "QVTKWidget.h"
 #include <QAction>
 #include <QApplication>
 #include <QDebug>
@@ -23,6 +23,7 @@
 #include <QtCore/QVariant>
 #include "dcmformatconversion.h"
 #include "folderandfileoperationscollection.h"
+#include "tips.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
