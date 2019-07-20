@@ -1,19 +1,27 @@
 #include "mainwindow.h"
 #include "QMessageBox"
 #include "folderandfileoperationscollection.h"
+#include <QDockWidget>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) { setupUi(); }
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+    setupUi();
+    Viewers *view = new Viewers();
+    this->setCentralWidget(view);
+
+    myControlPanel *myDock = new myControlPanel();
+    this->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, myDock);
+}
 
 MainWindow::~MainWindow() {}
 
 void MainWindow::setupUi() {
     this->resize(1024, 768);
-    this->centralWidget();
     creatrFileActions();
 }
 
 void MainWindow::creatrFileActions() {
     menuBar = new QMenuBar(this);
+    this->setMenuBar(menuBar);
 
     menuFiles = new QMenu(menuBar);
     menuFiles->setTitle(QString::fromUtf8("Files"));

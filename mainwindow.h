@@ -4,6 +4,11 @@
 #include <QMainWindow>
 
 //#include "QVTKWidget.h"
+#include "dcmformatconversion.h"
+#include "folderandfileoperationscollection.h"
+#include "mycontrolpanel.h"
+#include "tips.h"
+#include "viewers.h"
 #include <QAction>
 #include <QApplication>
 #include <QDebug>
@@ -21,10 +26,6 @@
 #include <QToolBar>
 #include <QWidget>
 #include <QtCore/QVariant>
-#include "dcmformatconversion.h"
-#include "folderandfileoperationscollection.h"
-#include "tips.h"
-
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -55,7 +56,7 @@ protected:
 
 private slots:
     void onOpenDicomFolderSlot(); // in direct to 'actionOpenDicomsPath'
-    void onWriteDicom2PngSlot(); // in direct to 'actionWritePngPath'
+    void onWriteDicom2PngSlot();  // in direct to 'actionWritePngPath'
 };
 
 #endif // MAINWINDOW_H

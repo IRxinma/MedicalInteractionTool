@@ -29,6 +29,7 @@ SOURCES += \
         folderandfileoperationscollection.cpp \
         main.cpp \
         mainwindow.cpp \
+        mycontrolpanel.cpp \
         tips.cpp \
         viewers.cpp
 
@@ -36,6 +37,8 @@ HEADERS += \
         dcmformatconversion.h \
         folderandfileoperationscollection.h \
         mainwindow.h \
+        mycontrolpanel.h \
+        mywidget.h \
         tips.h \
         viewers.h
 
@@ -45,130 +48,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 # /home/wx/projects/VTK-Release/include/vtk-8.90
-INCLUDEPATH += /home/jlu_wx/projects/VTK-Release/include/vtk-8.90 \
-/home/jlu_wx/projects/opencv-3.4/include/
-#               /usr/local/include/OpenMesh
-
-LIBS += -L/home/jlu_wx/projects/VTK-Release/lib/ \
--lvtknetcdf-8.90 \
--lvtklibproj-8.90 \
--lvtkChartsCore-8.90 \
--lvtkCommonColor-8.90 \
--lvtkCommonComputationalGeometry-8.90 \
--lvtkChartsCore-8.90 \
--lvtkCommonColor-8.90 \
--lvtkCommonComputationalGeometry-8.90 \
--lvtkCommonCore-8.90 \
--lvtkCommonDataModel-8.90 \
--lvtkCommonExecutionModel-8.90 \
--lvtkCommonMath-8.90 \
--lvtkCommonMisc-8.90 \
--lvtkCommonSystem-8.90 \
--lvtkCommonTransforms-8.90 \
--lvtkDICOMParser-8.90 \
--lvtkDomainsChemistry-8.90 \
--lvtkdoubleconversion-8.90 \
--lvtkexodusII-8.90 \
--lvtkexpat-8.90 \
--lvtkFiltersAMR-8.90 \
--lvtkFiltersCore-8.90 \
--lvtkFiltersExtraction-8.90 \
--lvtkFiltersFlowPaths-8.90 \
--lvtkFiltersGeneral-8.90 \
--lvtkFiltersGeneric-8.90 \
--lvtkFiltersGeometry-8.90 \
--lvtkFiltersHybrid-8.90 \
--lvtkFiltersHyperTree-8.90 \
--lvtkFiltersImaging-8.90 \
--lvtkFiltersModeling-8.90 \
--lvtkFiltersParallel-8.90 \
--lvtkFiltersParallelImaging-8.90 \
--lvtkFiltersPoints-8.90 \
--lvtkFiltersProgrammable-8.90 \
--lvtkFiltersSelection-8.90 \
--lvtkFiltersSMP-8.90 \
--lvtkFiltersSources-8.90 \
--lvtkFiltersStatistics-8.90 \
--lvtkFiltersTexture-8.90 \
--lvtkFiltersTopology-8.90 \
--lvtkFiltersVerdict-8.90 \
--lvtkfreetype-8.90 \
--lvtkGeovisCore-8.90 \
--lvtkgl2ps-8.90 \
--lvtkglew-8.90 \
--lvtkhdf5-8.90 \
--lvtkhdf5_hl-8.90 \
--lvtkImagingColor-8.90 \
--lvtkImagingCore-8.90 \
--lvtkImagingFourier-8.90 \
--lvtkImagingGeneral-8.90 \
--lvtkImagingHybrid-8.90 \
--lvtkImagingMath-8.90 \
--lvtkImagingMorphological-8.90 \
--lvtkImagingSources-8.90 \
--lvtkImagingStatistics-8.90 \
--lvtkImagingStencil-8.90 \
--lvtkInfovisCore-8.90 \
--lvtkInfovisLayout-8.90 \
--lvtkInteractionImage-8.90 \
--lvtkInteractionStyle-8.90 \
--lvtkInteractionWidgets-8.90 \
--lvtkIOAMR-8.90 \
--lvtkIOAsynchronous-8.90 \
--lvtkIOCore-8.90 \
--lvtkIOEnSight-8.90 \
--lvtkIOExodus-8.90 \
--lvtkIOExport-8.90 \
--lvtkIOExportPDF-8.90 \
--lvtkIOGeometry-8.90 \
--lvtkIOImage-8.90 \
--lvtkIOImport-8.90 \
--lvtkIOInfovis-8.90 \
--lvtkIOLegacy-8.90 \
--lvtkIOLSDyna-8.90 \
--lvtkIOMINC-8.90 \
--lvtkIOMovie-8.90 \
--lvtkIONetCDF-8.90 \
--lvtkIOParallel-8.90 \
--lvtkIOParallelXML-8.90 \
--lvtkIOPLY-8.90 \
--lvtkIOSegY-8.90 \
--lvtkIOSQL-8.90 \
--lvtkIOTecplotTable-8.90 \
--lvtkIOVideo-8.90 \
--lvtkIOXML-8.90 \
--lvtkIOXMLParser-8.90 \
--lvtkjpeg-8.90 \
--lvtkjsoncpp-8.90 \
--lvtklibharu-8.90 \
--lvtklibxml2-8.90 \
--lvtklz4-8.90 \
--lvtkloguru-8.90 \
--lvtklzma-8.90 \
--lvtkmetaio-8.90 \
--lvtkogg-8.90 \
--lvtkParallelCore-8.90 \
--lvtkpng-8.90 \
--lvtkRenderingAnnotation-8.90 \
--lvtkRenderingContext2D-8.90 \
--lvtkRenderingCore-8.90 \
--lvtkRenderingFreeType-8.90 \
--lvtkRenderingGL2PSOpenGL2-8.90 \
--lvtkRenderingImage-8.90 \
--lvtkRenderingLabel-8.90 \
--lvtkRenderingLOD-8.90 \
--lvtkRenderingOpenGL2-8.90 \
--lvtkRenderingVolume-8.90 \
--lvtkRenderingVolumeOpenGL2-8.90 \
--lvtksqlite-8.90 \
--lvtksys-8.90 \
--lvtktheora-8.90 \
--lvtktiff-8.90 \
--lvtkverdict-8.90 \
--lvtkViewsCore-8.90 \
--lvtkViewsInfovis-8.90 \
--lvtkzlib-8.90 \
--L/home/jlu_wx/projects/opencv-3.4/lib/ \
+INCLUDEPATH += /home/jlu_wx/projects/opencv-3.4/include
+LIBS += -L/home/jlu_wx/projects/opencv-3.4/lib/ \
 -lopencv_calib3d \
 -lopencv_core \
 -lopencv_dnn \
@@ -182,10 +63,132 @@ LIBS += -L/home/jlu_wx/projects/VTK-Release/lib/ \
 -lopencv_photo \
 -lopencv_video \
 -lopencv_videoio \
--lopencv_stitching \
-#-L/usr/local/lib/ \
-#-lOpenMeshCore \
-#-lOpenMeshTools
+-lopencv_stitching
+
+#----------------------------add VTK envirenment-----------------------------
+INCLUDEPATH += /home/jlu_wx/projects/VTK-8.1.0-Release/include \
+/home/jlu_wx/projects/VTK-8.1.0-Release/include/vtk-8.1
+LIBS += -L/home/jlu_wx/projects/VTK-8.1.0-Release/lib \
+-lvtkalglib-8.1 \
+-lvtkChartsCore-8.1 \
+-lvtkCommonColor-8.1 \
+-lvtkCommonComputationalGeometry-8.1 \
+-lvtkCommonCore-8.1 \
+-lvtkCommonDataModel-8.1 \
+-lvtkCommonExecutionModel-8.1 \
+-lvtkCommonMath-8.1 \
+-lvtkCommonMisc-8.1 \
+-lvtkCommonSystem-8.1 \
+-lvtkCommonTransforms-8.1 \
+-lvtkDICOMParser-8.1 \
+-lvtkDomainsChemistry-8.1 \
+-lvtkDomainsChemistryOpenGL2-8.1 \
+-lvtkexoIIc-8.1 \
+-lvtkexpat-8.1 \
+-lvtkFiltersAMR-8.1 \
+-lvtkFiltersCore-8.1 \
+-lvtkFiltersExtraction-8.1 \
+-lvtkFiltersFlowPaths-8.1 \
+-lvtkFiltersGeneral-8.1 \
+-lvtkFiltersGeneric-8.1 \
+-lvtkFiltersGeometry-8.1 \
+-lvtkFiltersHybrid-8.1 \
+-lvtkFiltersHyperTree-8.1 \
+-lvtkFiltersImaging-8.1 \
+-lvtkFiltersModeling-8.1 \
+-lvtkFiltersParallel-8.1 \
+-lvtkFiltersParallelImaging-8.1 \
+-lvtkFiltersPoints-8.1 \
+-lvtkFiltersProgrammable-8.1 \
+-lvtkFiltersSelection-8.1 \
+-lvtkFiltersSMP-8.1 \
+-lvtkFiltersSources-8.1 \
+-lvtkFiltersStatistics-8.1 \
+-lvtkFiltersTexture-8.1 \
+-lvtkFiltersTopology-8.1 \
+-lvtkFiltersVerdict-8.1 \
+-lvtkfreetype-8.1 \
+-lvtkGeovisCore-8.1 \
+-lvtkgl2ps-8.1 \
+-lvtkglew-8.1 \
+-lvtkGUISupportQt-8.1 \
+-lvtkGUISupportQtOpenGL-8.1 \
+-lvtkGUISupportQtSQL-8.1 \
+-lvtkhdf5-8.1 \
+-lvtkhdf5_hl-8.1 \
+-lvtkImagingColor-8.1 \
+-lvtkImagingCore-8.1 \
+-lvtkImagingFourier-8.1 \
+-lvtkImagingGeneral-8.1 \
+-lvtkImagingHybrid-8.1 \
+-lvtkImagingMath-8.1 \
+-lvtkImagingMorphological-8.1 \
+-lvtkImagingSources-8.1 \
+-lvtkImagingStatistics-8.1 \
+-lvtkImagingStencil-8.1 \
+-lvtkInfovisCore-8.1 \
+-lvtkInfovisLayout-8.1 \
+-lvtkInteractionImage-8.1 \
+-lvtkInteractionStyle-8.1 \
+-lvtkInteractionWidgets-8.1 \
+-lvtkIOAMR-8.1 \
+-lvtkIOCore-8.1 \
+-lvtkIOEnSight-8.1 \
+-lvtkIOExodus-8.1 \
+-lvtkIOExport-8.1 \
+-lvtkIOExportOpenGL2-8.1 \
+-lvtkIOGeometry-8.1 \
+-lvtkIOImage-8.1 \
+-lvtkIOImport-8.1 \
+-lvtkIOInfovis-8.1 \
+-lvtkIOLegacy-8.1 \
+-lvtkIOLSDyna-8.1 \
+-lvtkIOMINC-8.1 \
+-lvtkIOMovie-8.1 \
+-lvtkIONetCDF-8.1 \
+-lvtkIOParallel-8.1 \
+-lvtkIOParallelXML-8.1 \
+-lvtkIOPLY-8.1 \
+-lvtkIOSQL-8.1 \
+-lvtkIOTecplotTable-8.1 \
+-lvtkIOVideo-8.1 \
+-lvtkIOXML-8.1 \
+-lvtkIOXMLParser-8.1 \
+-lvtkjpeg-8.1 \
+-lvtkjsoncpp-8.1 \
+-lvtklibharu-8.1 \
+-lvtklibxml2-8.1 \
+-lvtklz4-8.1 \
+-lvtkmetaio-8.1 \
+-lvtkNetCDF-8.1 \
+-lvtknetcdfcpp-8.1 \
+-lvtkoggtheora-8.1 \
+-lvtkParallelCore-8.1 \
+-lvtkpng-8.1 \
+-lvtkproj4-8.1 \
+-lvtkRenderingAnnotation-8.1 \
+-lvtkRenderingContext2D-8.1 \
+-lvtkRenderingContextOpenGL2-8.1 \
+-lvtkRenderingCore-8.1 \
+-lvtkRenderingFreeType-8.1 \
+-lvtkRenderingGL2PSOpenGL2-8.1 \
+-lvtkRenderingImage-8.1 \
+-lvtkRenderingLabel-8.1 \
+-lvtkRenderingLOD-8.1 \
+-lvtkRenderingOpenGL2-8.1 \
+-lvtkRenderingQt-8.1 \
+-lvtkRenderingVolume-8.1 \
+-lvtkRenderingVolumeOpenGL2-8.1 \
+-lvtksqlite-8.1 \
+-lvtksys-8.1 \
+-lvtktiff-8.1 \
+-lvtkverdict-8.1 \
+-lvtkViewsContext2D-8.1 \
+-lvtkViewsCore-8.1 \
+-lvtkViewsInfovis-8.1 \
+-lvtkViewsQt-8.1 \
+-lvtkzlib-8.1
+#----------------------------add VTK envirenment-----------------------------
 
 # ----------------------------add ITK envirenment----------------------------
 INCLUDEPATH += /home/jlu_wx/projects/ITK-Release/include/ITK-5.1

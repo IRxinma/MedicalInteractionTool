@@ -32,7 +32,7 @@ bool DcmFormatConversion::ConvertDcm2Png(std::string readPath,
         try {
             reader->Update();
         } catch (itk::ExceptionObject &err) {
-            std::cerr << "ExceptionObject caught !" << endl;
+            std::cerr << "ExceptionObject caught !" << std::endl;
             std::cerr << err << std::endl;
             return EXIT_FAILURE;
         }

@@ -1,12 +1,12 @@
 #ifndef MYCONTROLPANEL_H
 #define MYCONTROLPANEL_H
 
-
-class myControlPanel : public QWidget
-{
+#include "mywidget.h"
+#include <QDockWidget>
+class myControlPanel : public QDockWidget {
     Q_OBJECT
 public:
-    explicit myControlPanel(QWidget *parent = nullptr);
+    explicit myControlPanel(QDockWidget *parent = nullptr);
 
 signals:
 

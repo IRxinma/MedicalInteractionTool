@@ -1,6 +1,6 @@
 #include "mycontrolpanel.h"
 
-myControlPanel::myControlPanel(QWidget *parent) : QWidget(parent)
-{
-
+myControlPanel::myControlPanel(QDockWidget *parent) : QDockWidget(parent) {
+    MyWidget *setDockSize = new MyWidget();
+    this->setWidget(setDockSize);
 }
