@@ -1,6 +1,12 @@
 #include "dcmformatconversion.h"
 #include <iostream>
 
+#include "itkGDCMImageIO.h"
+#include "itkImage.h"
+#include "itkImageFileReader.h"
+#include "itkImageFileWriter.h"
+#include "itkPNGImageIO.h"
+
 DcmFormatConversion::DcmFormatConversion() {}
 
 bool DcmFormatConversion::ConvertDcm2Png(std::string readPath,

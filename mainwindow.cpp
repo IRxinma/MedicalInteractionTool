@@ -1,22 +1,60 @@
 #include "mainwindow.h"
+
+#include "vtkAutoInit.h"
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
+VTK_MODULE_INIT(vtkInteractionStyle);
+VTK_MODULE_INIT(vtkRenderingVolumeOpenGL2);
+VTK_MODULE_INIT(vtkRenderingFreeType);
+
 #include "QMessageBox"
+#include "dcmformatconversion.h"
 #include "folderandfileoperationscollection.h"
+#include "mycontrolpanel.h"
+#include "tips.h"
+#include "viewers.h"
+#include "vtkDICOMImageReader.h"
+#include "vtkGenericOpenGLRenderWindow.h"
+#include "vtkImageViewer2.h"
+#include "vtkimageinteractioncallback.h"
 #include <QDockWidget>
+//------------------------------------------------------------------------------------
+#include <vtkCommand.h>
+#include <vtkImageActor.h>
+#include <vtkImageCast.h>
+#include <vtkImageData.h>
+#include <vtkImageMapToColors.h>
+#include <vtkImageReader2.h>
+#include <vtkImageReslice.h>
+#include <vtkInteractorStyleImage.h>
+#include <vtkLookupTable.h>
+#include <vtkMatrix4x4.h>
+#include <vtkMetaImageReader.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkRenderer.h>
+#include <vtkSmartPointer.h>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-    setupUi();
-    Viewers *view = new Viewers();
-    this->setCentralWidget(view);
+#include <vtkDICOMImageReader.h>
 
-    myControlPanel *myDock = new myControlPanel();
-    this->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, myDock);
-}
+#include "stdio.h"
+#include "string.h"
+//----------------------------------------------------------------------------------------
+// in direct to the read and write(2png) about Dicom
+static FolderAndFileOperationsCollection dicom_pre, dicom_behind;
+
+MainWindow::MainWindow(QMainWindow *parent) : QMainWindow(parent) { setupUi(); }
 
 MainWindow::~MainWindow() {}
 
 void MainWindow::setupUi() {
     this->resize(1024, 768);
     creatrFileActions();
+    QPointer<Viewers> view = new Viewers();
+    std::cout << "view1 = " << view << std::endl;
+    this->setCentralWidget(view);
+    //        view->showAll(dicom_pre.folder_path);
+    QPointer<myControlPanel> myDock = new myControlPanel();
+    this->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, myDock);
 }
 
 void MainWindow::creatrFileActions() {
@@ -37,7 +75,7 @@ void MainWindow::creatrFileActions() {
         QString::fromUtf8("Open one Dicoms' Folder"));
     connect(this->actionOpenDicomsPath, SIGNAL(triggered()), this,
             SLOT(onOpenDicomFolderSlot()));
-
+    //#include "stdio.h"
     actionWritePngPath = new QAction(this);
     actionWritePngPath->setText(QString::fromUtf8("WritePngFolder"));
     actionWritePngPath->setStatusTip(
@@ -65,20 +103,18 @@ void MainWindow::creatrFileActions() {
     menuBar->setGeometry(QRect(0, 0, this->width(), 30));
 }
 
-// in direct to the read and write(2png) about Dicom
-static FolderAndFileOperationsCollection dicom_pre, dicom_behind;
-
 void MainWindow::onOpenDicomFolderSlot() {
     // 1.Get Folder path
     QString folder_path = QFileDialog::getExistingDirectory(
         this, tr("Open Dicom Folder"), "/home/jlu_wx",
         QFileDialog::ShowDirsOnly);
-    //    qDebug()<<"Dicom Folder: "<<folder_path;
-
+    strcpy(dicom_pre.folder_path, folder_path.toStdString().c_str());
+    //    qDebug() << "Dicom Folder: " << dicom_pre.folder_path;
     // 2.Get file name and the number of dicom file
-    //    FolderAndFileOperationsCollection dicom_pre;
     dicom_pre.ReadNumOfFilesNameInTheReadFolder(folder_path.toStdString(),
                                                 ".dcm");
+    QPointer<Viewers> view = (Viewers*)this->centralWidget();
+    view->showAll(dicom_pre.folder_path);
 }
 
 void MainWindow::onWriteDicom2PngSlot() {

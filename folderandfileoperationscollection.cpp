@@ -11,9 +11,11 @@ int FolderAndFileOperationsCollection::ReadNumOfFilesNameInTheReadFolder(
     count = 0;
     std::string x, dirPath, filename;           // Intermediate variable
     dir = opendir((char *)rootdirPath.c_str()); // open one Folder
-
+    int k = 0;
     while ((ptr = readdir(dir)) != NULL) {
-        x        = ptr->d_name;
+        k++;
+//        std::cout << "num = " << k << std::endl;
+        x = ptr->d_name;
         dirPath  = rootdirPath + '/' + x;
         filename = x;
 
@@ -35,6 +37,7 @@ int FolderAndFileOperationsCollection::ReadNumOfFilesNameInTheReadFolder(
     std::qsort(Completefile_list, count, sizeof(char) * 300, cmp2);
     std::qsort(SingleFileName_list, count, sizeof(char) * 300, cmp2);
     closedir(dir);
+    return 0;
 }
 
 std::string

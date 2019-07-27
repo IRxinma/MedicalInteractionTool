@@ -4,12 +4,6 @@
 #include <QObject>
 #include <QDebug>
 
-#include "itkGDCMImageIO.h"
-#include "itkImage.h"
-#include "itkImageFileReader.h"
-#include "itkImageFileWriter.h"
-#include "itkPNGImageIO.h"
-
 class DcmFormatConversion:public QObject
 {
     Q_OBJECT

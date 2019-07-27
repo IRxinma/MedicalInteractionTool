@@ -31,7 +31,8 @@ SOURCES += \
         mainwindow.cpp \
         mycontrolpanel.cpp \
         tips.cpp \
-        viewers.cpp
+        viewers.cpp \
+        vtkimageinteractioncallback.cpp
 
 HEADERS += \
         dcmformatconversion.h \
@@ -40,7 +41,8 @@ HEADERS += \
         mycontrolpanel.h \
         mywidget.h \
         tips.h \
-        viewers.h
+        viewers.h \
+        vtkimageinteractioncallback.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -2,13 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-//#include "QVTKWidget.h"
-#include "dcmformatconversion.h"
-#include "folderandfileoperationscollection.h"
-#include "mycontrolpanel.h"
-#include "tips.h"
-#include "viewers.h"
 #include <QAction>
 #include <QApplication>
 #include <QDebug>
@@ -25,12 +18,12 @@
 #include <QTextEdit>
 #include <QToolBar>
 #include <QWidget>
-#include <QtCore/QVariant>
+//#include <QtCore/QVariant>
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QMainWindow *parent = 0);
     ~MainWindow();
 
 private:

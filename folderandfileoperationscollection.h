@@ -1,8 +1,6 @@
 #ifndef FOLDERANDFILEOPERATIONSCOLLECTION_H
 #define FOLDERANDFILEOPERATIONSCOLLECTION_H
 
-#include "mainwindow.h"
-#include "dcmformatconversion.h"
 #include <algorithm>
 #include <dirent.h>
 #include <fstream>
@@ -23,6 +21,7 @@ public:
 
     int count;
     // The former is the complete path, and the latter is the file name.
+    char folder_path[300];
     char Completefile_list[1000][300];
     char SingleFileName_list[1000][300];
 
@@ -30,8 +29,8 @@ protected:
     static int cmp2(const void *a, const void *b);
 
 private:
-//    friend MainWindow;
-//    friend DcmFormatConversion;
+    //    friend MainWindow;
+    //    friend DcmFormatConversion;
     // query and recorde the count of 'backslash'
     template <class C, class T> int CountBackSlash(const C &v, T val);
 
